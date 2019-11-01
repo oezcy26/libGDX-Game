@@ -1,5 +1,7 @@
 package ch.tfbern.libgdx.myfirstgame.screens;
 
+import ch.tfbern.libgdx.myfirstgame.MyFirstGame;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -8,10 +10,16 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class SplashScreen implements Screen {
+    private Game game;
+
     private static final float SIZE_FAKTOR = 50;
     private SpriteBatch batch;
     private Sprite sprite;
     private float rotateSpeed;
+
+    public SplashScreen(MyFirstGame game) {
+        this.game = game;
+    }
 
     @Override
     public void show() {
@@ -33,25 +41,30 @@ public class SplashScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClearColor(0, 0, 0.2f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
         batch.begin();
         sprite.draw(batch);
 
-        //reposition
-        float width = sprite.getWidth();
-        float height = sprite.getHeight();
-        sprite.setPosition(Gdx.graphics.getWidth() / 2 - (width / 2), Gdx.graphics.getHeight() / 2 - (height / 2));
+        //check for end
+        if(sprite.getRotation() < 360) {
 
-        //rotate
-        rotateSpeed = rotateSpeed + (3*delta);
-        sprite.setRotation(sprite.getRotation()+rotateSpeed);
-        System.out.println(delta);
+            //reposition
+            float width = sprite.getWidth();
+            float height = sprite.getHeight();
+            sprite.setPosition(Gdx.graphics.getWidth() / 2 - (width / 2), Gdx.graphics.getHeight() / 2 - (height / 2));
 
-        //resize
-        sprite.setSize(sprite.getWidth() * (1 + delta), sprite.getHeight() * (1 + delta));
-        sprite.setOriginCenter();
+            //rotate
+            rotateSpeed = rotateSpeed + (3 * delta);
+            sprite.rotate(rotateSpeed);
+//            sprite.setRotation(sprite.getRotation() + rotateSpeed);
+            System.out.println(delta);
+
+            //resize
+            sprite.setSize(sprite.getWidth() * (1 + delta), sprite.getHeight() * (1 + delta));
+            sprite.setOriginCenter();
+        }
 
 
         batch.end();

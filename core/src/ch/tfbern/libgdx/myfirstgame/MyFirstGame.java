@@ -1,31 +1,34 @@
 package ch.tfbern.libgdx.myfirstgame;
 
-import ch.tfbern.libgdx.myfirstgame.screens.SplashScreen;
-import com.badlogic.gdx.ApplicationAdapter;
+import ch.tfbern.libgdx.myfirstgame.screens.MainMenuScreen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public class MyFirstGame extends Game {
-	private static final String TITLE = "MyFirstGame" ;
-	SpriteBatch batch;
-	Texture img;
-	
-	@Override
-	public void create () {
-		Gdx.app.log(TITLE, "create() called");
-		setScreen(new SplashScreen());
+
+	public SpriteBatch batch;
+//	public BitmapFont font;
+	public Skin skin;
+	public void create() {
+		batch = new SpriteBatch();
+		skin = new Skin(Gdx.files.internal("uiskin.json"));
+
+
+//		Skin uiSkin = new Skin(Gdx.files.internal("uiskin.json"));
+		//Use LibGDX's default Arial font.
+//		font = new BitmapFont();
+		this.setScreen(new MainMenuScreen(this));
 	}
 
-	@Override
-	public void render () {
-		super.render();
+	public void render() {
+		super.render(); //important!
 	}
 
-	@Override
-	public void dispose () {
+	public void dispose() {
+		batch.dispose();
+		skin.dispose();
 	}
+
 }
