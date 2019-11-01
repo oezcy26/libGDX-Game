@@ -1,6 +1,7 @@
 package ch.tfbern.libgdx.myfirstgame;
 
 import ch.tfbern.libgdx.myfirstgame.screens.MainMenuScreen;
+import ch.tfbern.libgdx.myfirstgame.screens.SplashScreen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -19,7 +20,7 @@ public class MyFirstGame extends Game {
 //		Skin uiSkin = new Skin(Gdx.files.internal("uiskin.json"));
 		//Use LibGDX's default Arial font.
 //		font = new BitmapFont();
-		this.setScreen(new MainMenuScreen(this));
+		this.setScreen(new SplashScreen(this));
 	}
 
 	public void render() {

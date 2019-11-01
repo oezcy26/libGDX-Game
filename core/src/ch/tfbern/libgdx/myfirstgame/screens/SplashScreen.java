@@ -4,13 +4,14 @@ import ch.tfbern.libgdx.myfirstgame.MyFirstGame;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class SplashScreen implements Screen {
-    private Game game;
+    private MyFirstGame game;
 
     private static final float SIZE_FAKTOR = 50;
     private SpriteBatch batch;
@@ -32,6 +33,7 @@ public class SplashScreen implements Screen {
         float width = sprite.getWidth();
         float height = sprite.getHeight();
         sprite.setOriginCenter();
+        sprite.setPosition(Gdx.graphics.getWidth() / 2 - (width / 2), Gdx.graphics.getHeight() / 2 - (height / 2));
 
         rotateSpeed = 5;
 
@@ -48,7 +50,8 @@ public class SplashScreen implements Screen {
         sprite.draw(batch);
 
         //check for end
-        if(sprite.getRotation() < 360) {
+        float rotation = sprite.getRotation();
+        if (sprite.getRotation() <= 360 * 8) {
 
             //reposition
             float width = sprite.getWidth();
@@ -58,12 +61,28 @@ public class SplashScreen implements Screen {
             //rotate
             rotateSpeed = rotateSpeed + (3 * delta);
             sprite.rotate(rotateSpeed);
+
 //            sprite.setRotation(sprite.getRotation() + rotateSpeed);
-            System.out.println(delta);
 
             //resize
             sprite.setSize(sprite.getWidth() * (1 + delta), sprite.getHeight() * (1 + delta));
             sprite.setOriginCenter();
+
+            // change alpha
+//            Color color = sprite.getColor();
+//            color.a = color.a - 1000*delta;
+            float a = sprite.getColor().a;
+            System.out.println("current alpha: " + a);
+            if (a > 0) {
+                System.out.println("I will subtract :" + delta/7);
+                sprite.setAlpha(a - 0.002f);
+            }else{
+                sprite.setAlpha(0);
+            }
+
+        } else {
+            game.setScreen(new MainMenuScreen(this.game));
+
         }
 
 
