@@ -25,29 +25,14 @@ public class MainMenuScreen implements Screen {
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 800, 480); // Abschnitt der gezeigt wird
-
-
         stage = new Stage();
 
     }
 
     @Override
     public void show() {
-
-    }
-
-    @Override
-    public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 0.2f, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        camera.update();
-        game.batch.setProjectionMatrix(camera.combined);
-
-        game.batch.begin();
-
         Table table = new Table();
-        table.setBounds(0,0,Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); // (!)
+        table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); // (!)
 //        table.setDebug(true);
         table.setFillParent(true);
         table.align(Align.center);
@@ -63,27 +48,22 @@ public class MainMenuScreen implements Screen {
         table.add(landerButton).pad(10);
 
         stage.addActor(table);
+    }
+
+    @Override
+    public void render(float delta) {
+        Gdx.gl.glClearColor(0, 0, 0.2f, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        camera.update();
+        game.batch.setProjectionMatrix(camera.combined);
+
+        game.batch.begin();
 
         stage.draw();
 
-//        table.draw(game.batch,0.5f);
-
-
-
-//        game.draw(game.batch, "Welcome to Drop!!! ", 100, 150);
-//        game.font.draw(game.batch, "Tap anywhere to begin!", 100, 100);
-
-
-
         game.batch.end();
 
-
-
-
-//        if (Gdx.input.isTouched()) {
-//            game.setScreen(new GameScreen(game));
-//            dispose();
-//        }
 
     }
 
@@ -109,7 +89,7 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        this.stage.dispose();
     }
 
 

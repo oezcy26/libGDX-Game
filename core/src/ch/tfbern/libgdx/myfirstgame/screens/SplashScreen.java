@@ -74,9 +74,9 @@ public class SplashScreen implements Screen {
             float a = sprite.getColor().a;
             System.out.println("current alpha: " + a);
             if (a > 0) {
-                System.out.println("I will subtract :" + delta/7);
+                System.out.println("I will subtract :" + delta / 7);
                 sprite.setAlpha(a - 0.002f);
-            }else{
+            } else {
                 sprite.setAlpha(0);
             }
 
@@ -111,6 +111,6 @@ public class SplashScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        this.batch.dispose();
     }
 }
